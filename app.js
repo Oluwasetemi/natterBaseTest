@@ -48,14 +48,11 @@ app.put('/countries/:countryName', jwtCheck, (req, res) => {
   res.send(country);
 });
 
-app.delete('/countries', jwtCheck, (req, res) => {
+app.delete('/countries/:countryName', jwtCheck, (req, res) => {
   const { countryName } = req.params;
-  country.find((value) => {
-    if (value === countryName) {
-      
-    }
-  })
-  res.send(req.params.countryName)
+  const index = country.findIndex((value) => value === countryName);
+  country.splice(index, 1);
+  res.send(country);
 });
 
 app.get('*', (req, res) => {
